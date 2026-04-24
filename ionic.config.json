@@ -1,0 +1,7 @@
+{
+  "name": "PomodoroKu",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
