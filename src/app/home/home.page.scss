@@ -1,27 +1,429 @@
-#container {
+$bg-dark: #0f172a;
+$fokus-color: #24bd10;
+$deep-color: #3209a1;
+$istirahat-color: #b17f2a;
+
+ion-content {
+  --background: radial-gradient(circle at 20% 20%, #1f2937, #020617 80%);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  height: 100%;
+}
+html, body, ion-app, ion-content {
+  background: #020617 !important;
+}
+
+.welcome-overlay {
+  
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: radial-gradient(circle at 20% 20%, #1f2937, #020617 80%);
+
+  transition: all 0.8s ease;
+
+  &.leaving {
+     opacity: 0;
+     transform: scale(1.05);
+    pointer-events: none;
+     z-index: -1; 
+  }
+
+  .welcome-content {
+    text-align: center;
+
+    .fade-text {
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 4px;
+      animation: fadeInUp 1s forwards;
+    }
+
+    .glow-text {
+      color: white;
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-top: 5px;
+      text-shadow: 0 0 20px rgba(255,255,255,0.3);
+      animation: fadeInUp 1s 0.3s forwards;
+      opacity: 0;
+    }
+
+    .loader-line {
+      width: 0;
+      height: 2px;
+      margin: 25px auto 0;
+      border-radius: 10px;
+      background: $fokus-color;
+      animation: loadingBar 1.6s forwards;
+    }
+  }
+}
+
+.background-animator {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+
+  .shape {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.35;
+    animation: move 12s infinite alternate;
+  }
+
+  .blob-top {
+    top: -10%;
+    right: -5%;
+    width: 70vw;
+    height: 70vw;
+  }
+
+  .blob-bottom {
+    bottom: -10%;
+    left: -5%;
+    width: 60vw;
+    height: 60vw;
+  }
+}
+
+ion-content {padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom);}
+ion-content.fokus .shape { background: $fokus-color; }
+ion-content.deep .shape { background: $deep-color; }
+ion-content.istirahat .shape { background: $istirahat-color; }
+
+.main-ui-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.glass-card {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;
+  background: transparent;
+
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    
+  gap: 4vh;
+    
+    max-height: 90vh; 
+    padding: 0 20px;
+  }
+}
+
+// Styling Header agar proporsional
+.header-premium {
+  text-align: center;
+  z-index: 10;
+
+  .app-icon { 
+    font-size: 2rem; 
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 5px;
+  }
+
+  .header-text {
+    h1 { 
+      margin: 0; 
+      font-size: 2.4rem; 
+      font-weight: 800; 
+      color: white;
+      text-shadow: 0 0 20px rgba(255,255,255,0.2);
+    }
+    .quote-text { 
+      margin: 8px 0 0; 
+      opacity: 0.6; 
+      font-style: italic;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+    }
+  }
+}
+
+.glass-card {
+  width: 100%;
+  height: 100%;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; 
+
+  gap: 2vh; 
+
+  padding: 20px;
+  background: transparent; 
+  
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-height: 80vh; 
+    gap: 40px;        }
+}
+
+.header-premium {
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center;
   text-align: center;
 
+  gap: 6px;
+  margin-bottom: 15px;
+
+  .app-icon {
+    font-size: 1.6rem;
+    color: rgba(255,255,255,0.8);
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 2.2rem;   
+    font-weight: 900;    
+
+    color: white;
+
+    // 🔥 efek glow biar jelas
+    text-shadow:
+      0 0 10px rgba(255,255,255,0.4),
+      0 0 25px rgba(255,255,255,0.25);
+  }
+
+  .quote-text {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    letter-spacing: 0.5px;
+  }
+}
+
+.mode-pills-fancy {
+  display: flex;
+  padding: 5px;
+  margin: 20px 0;
+
+  border-radius: 100px;
+  background: rgba(0,0,0,0.3);
+  position: relative;
+
+  .pill-fancy {
+    flex: 1;
+    padding: 12px;
+    text-align: center;
+    font-weight: 700;
+    color: rgba(255,255,255,0.5);
+    cursor: pointer;
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  .pill-fancy.active {
+    color: white;
+  }
+
+  .active-gel {
+    position: absolute;
+    top: 5px;
+    height: calc(100% - 10px);
+    width: calc(33.33% - 7px);
+    border-radius: 100px;
+    background: rgba(255,255,255,0.12);
+    transition: 0.4s;
+  }
+}
+
+ion-content.fokus .active-gel { left: 5px; }
+ion-content.deep .active-gel { left: 33.33%; }
+ion-content.istirahat .active-gel { left: 66.66%; }
+
+.timer-wrapper {
+  position: relative;
+  width: 65vw;
+  max-width: 300px;
+  min-width: 220px;
+  aspect-ratio: 1 / 1;
+  margin: 20px auto;
+
+  .remaining-time {
+    font-size: clamp(3rem, 12vw, 4.5rem); 
+    font-weight: 800;
+  }
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    filter: blur(50px);
+    z-index: 0;
+  }
+
+  .progress-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+
+    circle {
+      fill: transparent;
+      stroke-width: 5;
+    }
+
+    .ring-bg {
+      stroke: rgba(255,255,255,0.08);
+    }
+
+    .ring-bar {
+      stroke-linecap: round;
+      stroke-dasharray: 283;
+    }
+  }
+}
+
+ion-content.fokus .timer-wrapper::before {
+  background: radial-gradient(circle, rgba(34,197,94,0.3), transparent 70%);
+}
+ion-content.deep .timer-wrapper::before {
+  background: radial-gradient(circle, rgba(168,85,247,0.3), transparent 70%);
+}
+ion-content.istirahat .timer-wrapper::before {
+  background: radial-gradient(circle, rgba(245,158,11,0.3), transparent 70%);
+}
+
+ion-content.fokus .ring-bar { stroke: $fokus-color; }
+ion-content.deep .ring-bar { stroke: $deep-color; }
+ion-content.istirahat .ring-bar { stroke: $istirahat-color; }
+
+.timer-text-wrap {
   position: absolute;
-  left: 0;
-  right: 0;
   top: 50%;
-  transform: translateY(-50%);
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  text-align: center;
+  z-index: 2;
+  width: 100%;
+
+  .remaining-time {
+    font-size: 4rem;
+    font-weight: 800;
+    color: white;
+    text-shadow:
+    0 0 10px rgba(255,255,255,0.4),
+    0 0 25px currentColor;
+  }
+
+  .mode-status {
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    opacity: 0.7;
+  }
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+.control-actions-fancy {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 15px;
+
+  .btn-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+
+    ion-button {
+      width: 75px;
+      height: 75px;
+
+      --border-radius: 20px;
+      --background: linear-gradient(145deg, #1f2937, #374151);
+
+      --background: linear-gradient(
+        145deg,
+        rgba(255,255,255,0.15),
+        rgba(255,255,255,0.05)
+      );
+
+      --color: white;
+
+      border: 1px solid rgba(255,255,255,0.2);
+
+      backdrop-filter: blur(10px);
+
+      box-shadow:
+         0 8px 20px rgba(0,0,0,0.6),
+    0 0 10px rgba(255,255,255,0.1) inset;
+
+      transition: all 0.2s ease;
+    }
+
+    ion-button:hover {
+      filter: brightness(1.2);
+    }
+
+    ion-button:active {
+      transform: scale(0.9);
+    }
+
+    span {
+      font-size: 0.75rem;
+      opacity: 0.8;
+      color: white;
+    }
+  }
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+// ==========================================
+// ✨ ANIMATIONS
+// ==========================================
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-#container a {
-  text-decoration: none;
+@keyframes loadingBar {
+  to { width: 120px; }
+}
+
+@keyframes move {
+  from { transform: translate(0,0); }
+  to { transform: translate(40px,40px); }
+}
+
+@keyframes fadeApp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }

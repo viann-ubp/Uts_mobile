@@ -1,20 +1,99 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [ngClass]="currentMode">
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div class="welcome-overlay" [class.leaving]="isLeaving" *ngIf="showWelcome">
+    <div class="welcome-content">
+      <h2 class="fade-text">Welcome to</h2>
+      <h1 class="glow-text">PomodoroKu</h1>
+      <div class="loader-line"></div>
+    </div>
   </div>
+
+  <div class="background-animator">
+    <div class="shape blob-top"></div>
+    <div class="shape blob-bottom"></div>
+  </div>
+
+  <div class="main-ui-container">
+    <div class="glass-card">
+      <div class="content-wrapper">
+
+        <!-- 🧠 HEADER -->
+        <div class="header-premium">
+          <ion-icon name="hourglass-outline" class="app-icon"></ion-icon>
+          <div class="header-text">
+            <h1>PomodoroKu</h1>
+            <p class="quote-text">“{{ currentQuote }}”</p>
+          </div>
+        </div>
+
+        <!-- 🎛️ MODE SELECTOR -->
+        <div class="mode-pills-fancy">
+          <div class="pill-fancy" 
+               [class.active]="currentMode === 'fokus'" 
+               (click)="setMode('fokus')">
+            Focus
+          </div>
+          <div class="pill-fancy" 
+               [class.active]="currentMode === 'deep'" 
+               (click)="setMode('deep')">
+            Deep
+          </div>
+          <div class="pill-fancy" 
+               [class.active]="currentMode === 'istirahat'" 
+               (click)="setMode('istirahat')">
+            Rest
+          </div>
+          <div class="active-gel"></div>
+        </div>
+
+        <!-- ⏱️ TIMER SECTION -->
+        <div class="timer-wrapper">
+          <svg class="progress-ring" viewBox="0 0 100 100">
+            <circle class="ring-bg" cx="50" cy="50" r="45"></circle>
+            <circle 
+              class="ring-bar"
+              cx="50"
+              cy="50"
+              r="45"
+              [style.stroke-dashoffset]="getOffset()">
+            </circle>
+          </svg>
+
+          <div class="timer-text-wrap">
+            <div class="remaining-time">
+              {{ formatTime(remainingTime) }}
+            </div>
+            <div class="mode-status">
+              {{ modeConfig[currentMode].label }}
+            </div>
+          </div>
+        </div>
+
+        <!-- 🔘 CONTROLS (START & RESET) -->
+        <div class="control-actions-fancy">
+          <div class="btn-group">
+            <ion-button 
+              (click)="isRunning ? pauseTimer() : startTimer()" 
+              class="btn-main">
+              <ion-icon [name]="isRunning ? 'pause' : 'play'"></ion-icon>
+            </ion-button>
+            <span class="btn-label">
+              {{ isRunning ? 'Pause' : 'Start' }}
+            </span>
+          </div>
+
+          <div class="btn-group">
+            <ion-button 
+              (click)="resetTimer()" 
+              class="btn-main secondary">
+              <ion-icon name="refresh-outline"></ion-icon>
+            </ion-button>
+            <span class="btn-label">Reset</span>
+          </div>
+        </div>
+
+      </div> 
+    </div> 
+  </div> 
+
 </ion-content>
