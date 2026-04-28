@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package io.rehalivan.PomodoroKu;
 
 import com.getcapacitor.BridgeActivity;
 

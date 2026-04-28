@@ -1,6 +1,6 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 const config: CapacitorConfig = {
-  appId: 'com.your.app',
+  appId: 'io.rehalivan.PomodoroKu',
   appName: 'PomodoroKu',
   webDir: 'www',
   plugins: {
@@ -13,3 +13,5 @@ const config: CapacitorConfig = {
     },
   },
 };
+
+export default config;
